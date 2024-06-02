@@ -21,4 +21,15 @@ def IniciarDownloadVideo():
     try:
         ytLink = link.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
-        video = ytObject.streams.get_highest_resolution()                
+        video = ytObject.streams.get_highest_resolution() 
+        file_path = f"{ytObject.title}.mp4"
+        video.download(output_path='.', filename=file_path)
+        titulo.configure(text=ytObject.title, text_color='white')
+        ultimalabel.configure(text='Download Concluído com sucesso!', text_color='green')
+    except Exception as e:
+        ultimalabel.configure(text=f'Erro: {str(e)}', text_color='red')
+
+def on_progress(stream, chunk, bytes_remaining):
+    tamanho_total = stream.filesize
+    bytes = tamanho_total - bytes_remaining
+    porcentagem = bytes / tamanho_total * 100
