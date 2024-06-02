@@ -49,3 +49,18 @@ customtkinter.set_default_color_theme('blue')
 app = customtkinter.CTk()
 app.geometry('720x480')
 app.title('Paneleiros Downloader')
+
+
+# < ========== TITULO DO APP ========== >
+titulo = customtkinter.CTkLabel(app, text='Coloque o link da sua música/vídeo que deseja baixar')
+titulo.pack(padx=10, pady=10)
+
+var = tkinter.StringVar()
+link = customtkinter.CTkEntry(app, width=350, height=40, textvariable=var)
+link.pack()
+
+ultimalabel = customtkinter.CTkLabel(app, text='')
+ultimalabel.pack()
+
+# < ========== BARRA DE PROGRESSO ========== >
+barra_progresso = customtkinter.CTkLabel(app, text='0%')
