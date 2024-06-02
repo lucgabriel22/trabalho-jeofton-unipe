@@ -10,7 +10,7 @@ def IniciarDownloadMusica():
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
         musica = ytObject.streams.filter(only_audio=True).first()
         file_path = f"{ytObject.title}.mp3"
-        musica.download(output_patch='.', filename=filepatch)
+        musica.download(output_path='.', filename=file_path)
         titulo.configure(text=ytObject.title, text_color='white')
         ultimalabel.configure(
             text='Download Concluído com sucesso!', text_color='green')
@@ -22,7 +22,7 @@ def IniciarDownloadVideo():
     try:
         ytLink = link.get()
         ytObject = YouTube(ytLink, on_progress_callback=on_progress)
-        video = ytObject.streams.get_highest_resolution()
+        video = ytObject.streams.get_highest_resolution(on_progress_callback=on_progress)
         file_path = f"{ytObject.title}.mp4"
         video.download(output_path='.', filename=file_path)
         titulo.configure(text=ytObject.title, text_color='white')
@@ -64,3 +64,19 @@ ultimalabel.pack()
 
 # < ========== BARRA DE PROGRESSO ========== >
 barra_progresso = customtkinter.CTkLabel(app, text='0%')
+barra_progresso.pack()
+
+barra_progresso2 = customtkinter.CTkProgressBar(app, width=400)
+barra_progresso2.set(0)
+barra_progresso2.pack(padx=10, pady=10)
+
+# <============ BOTÃO DOWNLOAD em formato MP3 ==========>
+downloadmusica = customtkinter.CTkButton(app, text='Iniciar Download em MP3', command=IniciarDownloadMusica)
+downloadmusica.pack(padx=10, pady=10)
+
+# <============ BOTÃO DOWNLOAD em formato MP3 ==========>
+downloadvideo = customtkinter.CTkButton(app, text='Iniciar Download em MP3', command=IniciarDownloadVideo)
+downloadvideo.pack(padx=10, pady=10)
+
+app.mainloop()
+
