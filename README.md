@@ -16,3 +16,8 @@
 - Pytube
 - Tkinter
 - Customtkinter
+
+
+## Como instalar o APP?
+
+Simples! Basta escrever pip install -r requirements.txt
